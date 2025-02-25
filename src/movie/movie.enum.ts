@@ -1,0 +1,4 @@
+export enum MovieEnum {
+  MOVIE_REPOSITORY = 'MOVIE_REPOSITORY',
+  DATA_SOURCE = 'DATA_SOURCE',
+}
