@@ -1,0 +1,4 @@
+export enum ProducerEnum {
+  PRODUCER_REPOSITORY = 'PRODUCER_REPOSITORY',
+  DATA_SOURCE = 'DATA_SOURCE',
+}
