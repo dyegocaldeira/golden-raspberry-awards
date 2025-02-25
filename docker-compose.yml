@@ -1,0 +1,8 @@
+services:
+  golden-raspberry-awards:
+    container_name: golden-raspberry-awards
+    build:
+      context: .
+    tty: true
+    ports:
+      - "3000:3000"

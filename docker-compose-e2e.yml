@@ -1,0 +1,7 @@
+services:
+  golden-raspberry-awards-e2e:
+    container_name: golden-raspberry-awards-e2e
+    build:
+      context: .
+      dockerfile: Dockerfile.e2e
+    tty: true
