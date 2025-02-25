@@ -20,10 +20,10 @@ describe('Producer (e2e)', () => {
         await app.init();
     });
 
-    it('/producer/range-awards (GET)', async () => {
+    it('/api/producer/range-awards (GET)', async () => {
 
         const response = await request(app.getHttpServer())
-            .get('/producer/range-awards')
+            .get('/api/producer/range-awards')
             .expect(200)
             .expect('Content-Type', /json/)
             .expect({
