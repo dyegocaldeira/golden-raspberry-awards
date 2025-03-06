@@ -1,5 +1,6 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { ProducerService } from './producer.service';
+import { IResultsProducerAwards } from './producer.interface';
 
 @Controller('api/producer')
 export class ProducerController {
@@ -8,7 +9,7 @@ export class ProducerController {
   ) { }
 
   @Get('range-awards')
-  public async getRangeAwards(): Promise<ResultsProducerAwards> {
+  public async getRangeAwards(): Promise<IResultsProducerAwards> {
     return this.producerService.getProducerWithAwardRange();
   }
 }
