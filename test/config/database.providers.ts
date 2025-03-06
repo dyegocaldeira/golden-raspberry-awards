@@ -1,20 +1,21 @@
 import { DataSource } from 'typeorm';
-import { join } from 'path';
-import { ProducerEnum } from '../../src/producer/producer.enum';
+import { Movies } from '../../src/movie/movie.entity';
+import { Producers } from '../../src/producer/producer.entity';
+import { Studios } from '../../src/studio/studio.entity';
 
 export const testDatabaseProviders = [
     {
-        provide: ProducerEnum.DATA_SOURCE,
+        provide: 'DATA_SOURCE',
         useFactory: async () => {
             const dataSource = new DataSource({
                 type: 'sqlite',
                 database: ':memory:',
-                entities: [join(__dirname, '../../**/*.entity{.ts,.js}')],
+                entities: [Movies, Producers, Studios],
                 synchronize: true,
                 dropSchema: true
             });
 
             return dataSource.initialize();
         },
-    },
+    }
 ];
