@@ -55,7 +55,7 @@ export class ImportCSVProvider implements OnModuleInit {
     const movie = new Movies();
     movie.year = movieData.year;
     movie.title = movieData.title;
-    movie.winner = movieData.winner;
+    movie.winner = movieData.winner as boolean;
 
     const producerArray = this.extractEntities(movieData.producers);
     const studioArray = this.extractEntities(movieData.studios);

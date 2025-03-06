@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as fs from 'fs';
-import * as csv from 'csv-parser';
-import { Movies } from '../../movie/movie.entity';
+import csv from 'csv-parser';
 import { CsvType } from './csv.type';
 
 @Injectable()
@@ -16,13 +15,13 @@ export class CsvService {
             return [];
         }
 
-        return new Promise(async (resolve, reject) => {
+        return new Promise((resolve, reject) => {
             const results: CsvType[] = [];
             const separator = process.env.CSV_SEPARATOR || ';';
 
             fs.createReadStream(filePath)
                 .pipe(csv({ separator }))
-                .on('data', (data) => {
+                .on('data', (data: CsvType) => {
                     if (this.validateData(data)) {
                         data.winner = Boolean(data.winner && data.winner === 'yes');
                         results.push(data);
@@ -37,10 +36,7 @@ export class CsvService {
         return fs.existsSync(filePath);
     }
 
-    private validateData(data: Movies): boolean {
-        const requiredFields = ['year', 'title', 'studios', 'producers'] as Partial<
-            keyof Movies
-        >[];
-        return requiredFields.every((field) => data[field]);
+    private validateData(data: CsvType): boolean {
+        return ['year', 'title', 'studios', 'producers'].every(field => data[field]);
     }
 }
