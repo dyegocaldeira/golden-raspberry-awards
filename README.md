@@ -10,12 +10,13 @@ Esta é uma aplicação desenvolvida em [NestJS](https://nestjs.com/) utilizando
 ## Estrutura de Diretórios
 
 - O arquivo com os dados a serem importados (CSV) deve estar no diretório `src/data` com o nome `movielist.csv` (`src/data/movielist.csv`).
-- Os testes E2E utilizam uma cópia do arquivo de dados para testes, localizado em `tests/data/__e2e__.csv`. **Este arquivo não deve ser substituído, pois os testes dependem dele**.
 - Por padrão, o delimitador das colunas do CSV é `;`. Caso precise usar `,`, basta passar a seguinte variável de ambiente: `CSV_SEPARATOR=","`.
+- O teste E2E `csv-file.e2e-spec` utiliza uma cópia do arquivo de dados para garantir que o fluxo todo funcione, localizado em `tests/data/__e2e__.csv`. **Este arquivo não deve ser substituído, pois o teste depende dele**.
+- O restante dos testes E2E utilizam dados mockados para garantir uma melhor perfomance na execução.
 
 ---
 
-## Executando a Aplicação com Docker
+## Copiando a Aplicação
 
 1. Clone o repositório:
 
@@ -29,26 +30,25 @@ Esta é uma aplicação desenvolvida em [NestJS](https://nestjs.com/) utilizando
    cd golden-raspberry-awards
    ```
 
-3. Construa e rode o container:
+### Executando a aplicação com Docker
+
+1. Para iniciar a aplicação:
 
    ```sh
    docker build -t golden-raspberry-awards . && docker run -p 3000:3000 golden-raspberry-awards
    ```
+> A aplicação subirá como em ambiente de produção.
 
-   A aplicação subirá como em ambiente de produção.
-
-### Executando Testes E2E com Docker
-
-1. Construa e rode o container de testes:
+2. Para executar os testes E2E:
    ```sh
    docker build -t golden-raspberry-awards-e2e -f Dockerfile-e2e . && docker run golden-raspberry-awards-e2e
-   ```
-
+   ``` 
+> Para garantir que nenhuma camada antiga do Docker esteja sendo reutilizada, utilize a flag `--no-cache` ao fazer o build do container.
 ---
 
-## Executando a Aplicação com Docker Compose
+### Executando a Aplicação com Docker Compose
 
-1. Para iniciar a aplicação em ambiente de produção:
+1. Para iniciar a aplicação:
 
    ```sh
    docker compose up
@@ -59,10 +59,10 @@ Esta é uma aplicação desenvolvida em [NestJS](https://nestjs.com/) utilizando
    ```sh
    docker compose -f docker-compose-e2e.yml up
    ```
-
+> Para garantir que nenhuma camada antiga do Docker esteja sendo reutilizada, utilize as flags `--build --force-recreate` ao executar o compose.
 ---
 
-## Executando a Aplicação Localmente (Sem Docker)
+### Executando a Aplicação Localmente (Sem Docker)
 
 1. Certifique-se de ter o Node.js 22.14.0 instalado.
 2. Entre no diretório da aplicação:
